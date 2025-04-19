@@ -22,7 +22,7 @@ def init_db_command():
                 title='Portfolio Website',
                 description='A personal portfolio website built with Flask and Bootstrap.',
                 image_url='https://via.placeholder.com/300',
-                github_url='https://github.com/yourusername/portfolio',
+                github_url='https://github.com/adrianskrzypnik/flask-portfolio-website',
                 live_url='https://yourportfolio.com',
                 technologies='Flask, SQLAlchemy, Bootstrap, JavaScript'
             ),
@@ -61,8 +61,8 @@ def init_db_command():
         about = AboutMe(
             content="I'm a passionate software developer with experience in web development, data science, and cloud computing. I love building scalable applications and solving complex problems.",
             resume_url="https://yoursite.com/resume.pdf",
-            linkedin_url="https://linkedin.com/in/yourusername",
-            github_url="https://github.com/yourusername",
+            linkedin_url="https://www.linkedin.com/in/adrian-skrzypnik-3102782a4/",
+            github_url="https://github.com/adrianskrzypnik",
             twitter_url="https://twitter.com/yourusername"
         )
         db.session.add(about)
