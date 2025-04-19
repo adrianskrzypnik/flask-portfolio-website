@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}My Portfolio - Projects{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h2 class="mb-4">My Projects</h2>
+    <p class="lead mb-5">Here are some of the projects I've worked on. Click on each for more details.</p>
+
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text">{{ project.description|truncate(150) }}</p>
+                </div>
+                <div class="card-footer bg-white border-top-0">
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('projects.project_detail', project_id=project.id) }}" class="btn btn-sm btn-primary">View Details</a>
+                        <div>
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" class="btn btn-sm btn-outline-dark me-1">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank" class="btn btn-sm btn-outline-success">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center">
+            <p>No projects added yet. Check back soon!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

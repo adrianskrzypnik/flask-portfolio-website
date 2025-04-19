@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url_for('projects.projects') }}">Projects</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ project.title }}</li>
+                </ol>
+            </nav>
+
+            <div class="mb-4">
+                <img src="{{ project.image_url }}" alt="{{ project.title }}" class="img-fluid rounded">
+            </div>
+
+            <h2 class="mb-3">{{ project.title }}</h2>
+
+            <div class="mb-4">
+                <span class="badge bg-primary me-2">{{ project.date_added.strftime('%B %Y') }}</span>
+                {% for tech in project.technologies.split(',') %}
+                <span class="badge bg-secondary me-2">{{ tech.strip() }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="mb-4">
+                {{ project.description|safe }}
+            </div>
+
+            <div class="d-flex mb-5">
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="btn btn-dark me-2">
+                    <i class="fab fa-github me-1"></i> View on GitHub
+                </a>
+                {% endif %}
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" class="btn btn-success">
+                    <i class="fas fa-external-link-alt me-1"></i> View Live Demo
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('projects.projects') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Projects
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

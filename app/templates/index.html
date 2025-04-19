@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}My Portfolio - Home{% endblock %}
+
+{% block content %}
+<section class="hero bg-primary text-white text-center py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-4">Hello, I'm <span class="fw-bold">Your Name</span></h1>
+                <p class="lead mb-4">A passionate web developer specializing in Python, Flask, and web technologies</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{{ url_for('projects.projects') }}" class="btn btn-light btn-lg me-2">View My Work</a>
+                    <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light btn-lg">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">About Me</h2>
+                <p class="lead">{{ about.content|safe if about else 'Welcome to my portfolio! I am a passionate developer with expertise in web development and software engineering.' }}</p>
+                <a href="{{ url_for('main.about') }}" class="btn btn-primary mt-3">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Projects</h2>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ project.image_url }}" class="card-img-top" alt="{{ project.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text">{{ project.description|truncate(100) }}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('projects.project_detail', project_id=project.id) }}" class="btn btn-sm btn-primary">View Details</a>
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>Technologies: {{ project.technologies }}</small>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12 text-center">
+                <p>No projects added yet. Check back soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('projects.projects') }}" class="btn btn-outline-primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">My Skills</h2>
+        <div class="row">
+            {% for category, category_skills in skills|groupby('category') %}
+            <div class="col-md-6 mb-4">
+                <h4>{{ category }}</h4>
+                {% for skill in category_skills %}
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>{{ skill.name }}</span>
+                        <span>{{ skill.proficiency }}%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: {{ skill.proficiency }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="col-12 text-center">
+                <p>No skills added yet. Check back soon!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Let's Work Together</h2>
+                <p class="lead mb-5">Have a project in mind? Let's discuss how I can help bring your ideas to life.</p>
+                <a href="{{ url_for('main.contact') }}" class="btn btn-primary btn-lg">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

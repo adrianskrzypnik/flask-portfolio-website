@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit About Information - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Edit About Information</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('admin.admin_about') }}">
+                        <div class="mb-3">
+                            <label for="content" class="form-label">About Content</label>
+                            <textarea class="form-control" id="content" name="content" rows="8" required>{{ about.content if about else '' }}</textarea>
+                            <div class="form-text">You can use HTML tags for formatting.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="resume_url" class="form-label">Resume URL</label>
+                            <input type="url" class="form-control" id="resume_url" name="resume_url" value="{{ about.resume_url if about else '' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="linkedin_url" class="form-label">LinkedIn URL</label>
+                            <input type="url" class="form-control" id="linkedin_url" name="linkedin_url" value="{{ about.linkedin_url if about else '' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="github_url" class="form-label">GitHub URL</label>
+                            <input type="url" class="form-control" id="github_url" name="github_url" value="{{ about.github_url if about else '' }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="twitter_url" class="form-label">Twitter URL</label>
+                            <input type="url" class="form-control" id="twitter_url" name="twitter_url" value="{{ about.twitter_url if about else '' }}">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.admin') }}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages - Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <h2 class="mb-4">Contact Messages</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for message in messages %}
+                        <tr {% if not message.read %}class="table-primary"{% endif %}>
+                            <td>{{ message.name }}</td>
+                            <td>{{ message.email }}</td>
+                            <td>{{ message.subject }}</td>
+                            <td>{{ message.date_sent.strftime('%Y-%m-%d') }}</td>
+                            <td>
+                                {% if message.read %}
+                                <span class="badge bg-success">Read</span>
+                                {% else %}
+                                <span class="badge bg-warning text-dark">Unread</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('admin.view_message', message_id=message.id) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No messages found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

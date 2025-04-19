@@ -1,0 +1,103 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    padding-top: 56px;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - 200px);
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Skills Progress */
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* Card Hover Effect */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Social Links */
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+}
+
+/* Admin Dashboard Cards */
+.admin-card {
+    transition: all 0.3s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Form */
+.contact-form {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animated {
+    animation: fadeIn 1s ease;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 0;
+    }
+
+    h1.display-4 {
+        font-size: 2.5rem;
+    }
+}
